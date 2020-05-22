@@ -1,17 +1,9 @@
 #include "mainMenu.hpp"
+#include "settings.hpp"
 #include <iostream>
-MainMenu::MainMenu(StateData* stateData) : State(stateData)
+MainMenu::MainMenu(StateData *stateData) : State(stateData)
 {
-    Button *newGame = new Button(sf::Vector2i(200, 100), sf::Vector2i(200, 50), (char *)"New Game");
-    newGame->setTextColor(sf::Color::Red);
-    newGame->setFrameColor(sf::Color::White);
-    newGame->addCallback(std::bind(&MainMenu::StartGame, this));
-    buttons.insert(buttons.end(), newGame);
-    Button *end = new Button(sf::Vector2i(200, 500), sf::Vector2i(200, 50), (char *)"Quit");
-    end->setTextColor(sf::Color::Red);
-    end->setFrameColor(sf::Color::White);
-    end->addCallback(std::bind(&MainMenu::EndGame, this));
-    buttons.insert(buttons.end(), end);
+    initButtons();
 }
 
 MainMenu::~MainMenu()
@@ -20,6 +12,30 @@ MainMenu::~MainMenu()
     {
         delete btn;
     }
+}
+
+void MainMenu::initButtons()
+{
+    Button *newGame = new Button(sf::Vector2i(window->getSize().x / 2 - 125, 100), sf::Vector2i(250, 50), (char *)"New Game");
+    newGame->setTextColor(sf::Color::Black);
+    newGame->setFrameColor(sf::Color(0xc5,0xc8,0xc6));
+    newGame->setBorderColor(sf::Color(0x75,0x80,0x80));
+    newGame->addCallback(std::bind(&MainMenu::StartGame, this));
+    buttons.insert(buttons.end(), newGame);
+
+    Button *settings = new Button(sf::Vector2i(window->getSize().x / 2 - 125, 200), sf::Vector2i(250, 50), (char *)"Settings");
+    settings->setTextColor(sf::Color::Black);
+    settings->setFrameColor(sf::Color(0xc5,0xc8,0xc6));
+    settings->setBorderColor(sf::Color(0x75,0x80,0x80));
+    settings->addCallback([this]() {stateStack->push(new Settings(stateData));});
+    buttons.insert(buttons.end(), settings);
+
+    Button *end = new Button(sf::Vector2i(window->getSize().x / 2 - 125, 300), sf::Vector2i(250, 50), (char *)"Quit");
+    end->setTextColor(sf::Color::Black);
+    end->setFrameColor(sf::Color(0xc5,0xc8,0xc6));
+    end->setBorderColor(sf::Color(0x75,0x80,0x80));
+    end->addCallback(std::bind(&MainMenu::EndGame, this));
+    buttons.insert(buttons.end(), end);
 }
 
 void MainMenu::update()
@@ -55,6 +71,5 @@ void MainMenu::StartGame()
 
 void MainMenu::EndGame()
 {
-    std::cout << "End game" << std::endl;
     endState();
 }

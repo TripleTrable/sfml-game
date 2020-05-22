@@ -4,6 +4,7 @@ State::State(StateData* stateData)
 {
     this->stateData = stateData;
     this->stateStack = stateData->stateStack;
+    this->window = stateData->window;
 }
 
 State::~State()

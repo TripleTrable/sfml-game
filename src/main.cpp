@@ -1,7 +1,8 @@
 #include "game.hpp"
 int main()
 {
-    game *Game = new game();
-    Game->init();
+    Game *game = new Game();
+    game->init();
+    delete game;
     return 0;
 }

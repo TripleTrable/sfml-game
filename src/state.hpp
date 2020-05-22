@@ -1,22 +1,30 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <stack>
+
+class State;
+
 class StateData
 {
 
-    public:
+public:
     StateData() {}
-    std::stack<State*>* stateStack;
+    std::stack<State *> *stateStack;
+    sf::Window *window;
 };
 
 class State
 {
+protected:
+    std::stack<State *> *stateStack;
+    StateData *stateData;
+    sf::Window *window;
+
 private:
     bool quit = false;
-    StateData* stateData;
-    std::stack<State*>* stateStack;
+
 public:
-    State(StateData* stateData);
+    State(StateData *stateData);
     ~State();
 
     virtual void update() = 0;

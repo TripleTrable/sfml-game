@@ -141,10 +141,10 @@ void Button::updateText()
         text.setCharacterSize(size.y);
     else
         text.setCharacterSize(textSize);
-    int xt = text.getGlobalBounds().width / 2;
-    int yt = text.getGlobalBounds().height / 2;
-    int xOff = size.x / 2 - xt;
-    int yOff = size.y / 2 - yt * 2;
+    int xt = text.getLocalBounds().width / 2;
+    int yt = text.getLocalBounds().height / 2;
+    int xOff = size.x / 2 - xt - text.getLocalBounds().left;
+    int yOff = size.y / 2 - yt - text.getLocalBounds().top;
     int x = xOff + position.x;
     int y = yOff + position.y;
     text.setPosition(sf::Vector2f(x, y));

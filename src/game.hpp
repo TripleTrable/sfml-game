@@ -3,7 +3,7 @@
 #include <stack>
 #include "state.hpp"
 #include "mainMenu.hpp"
-class game
+class Game
 {
 private:
     void eventHandler();
@@ -26,8 +26,8 @@ public:
     };
 
 
-    game();
-    ~game();
+    Game();
+    ~Game();
     void init();
 
     States GameState;

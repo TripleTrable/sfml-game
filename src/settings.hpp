@@ -2,19 +2,14 @@
 #include "state.hpp"
 #include "button.hpp"
 
-class MainMenu : public State
+class Settings : public State
 {
-
 private:
-    std::vector<Button*> buttons;
-    void initButtons();
+    /* data */
 public:
-    MainMenu(StateData* stateData);
-    ~MainMenu();
+    Settings(StateData* stateData);
+    ~Settings();
     void update();
     void render(sf::RenderWindow &window);
     void eventHandler(sf::Event *event,sf::RenderWindow *window);
-    void StartGame();
-    void EndGame();
 };
-

@@ -1,16 +1,17 @@
 #include "game.hpp"
-game::game()
+Game::Game()
 {
     window = new sf::RenderWindow(sf::VideoMode().getDesktopMode(), "Cerraria");
     event = new sf::Event();
     stateData.stateStack = &this->stateStack;
+    stateData.window = window;
 }
 
-game::~game()
+Game::~Game()
 {
 }
 
-void game::init()
+void Game::init()
 {
     GameState = States::RUNING;
     MainMenu *menu = new MainMenu(&stateData);
@@ -18,7 +19,7 @@ void game::init()
     run();
 }
 
-void game::eventHandler()
+void Game::eventHandler()
 {
     while (window->pollEvent(*event))
     {
@@ -29,7 +30,7 @@ void game::eventHandler()
     }
 }
 
-void game::update()
+void Game::update()
 {
     if (!stateStack.empty())
     {
@@ -47,9 +48,9 @@ void game::update()
     }
 }
 
-void game::render()
+void Game::render()
 {
-    window->clear();
+    window->clear(sf::Color::White);
 
     if (!stateStack.empty())
         stateStack.top()->render(*window);
@@ -57,7 +58,7 @@ void game::render()
     window->display();
 }
 
-void game::run()
+void Game::run()
 {
     while (GameState == States::RUNING)
     {
