@@ -50,6 +50,11 @@ void Button::setText(const char *text)
     this->text.setString(text);
 }
 
+void Button::setText(const wchar_t *text)
+{
+    this->text.setString(text);
+}
+
 void Button::setFrameColor(sf::Color color)
 {
     frameColor = color;

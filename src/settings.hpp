@@ -1,11 +1,11 @@
 #pragma once
 #include "state.hpp"
 #include "button.hpp"
-
+#include "hspinner.hpp"
 class Settings : public State
 {
 private:
-    /* data */
+    HSpinner<const char*>* resolution;
 public:
     Settings(StateData* stateData);
     ~Settings();

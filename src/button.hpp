@@ -50,6 +50,7 @@ public:
     void setTextFont(sf::Font font);
     void setTextFont(const char* name);
     void setText(const char *text);
+    void setText(const wchar_t *text);
     void setFrameColor(sf::Color color);
     void setTextColor(sf::Color color);
     void setBorderColor(sf::Color color);
